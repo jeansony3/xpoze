@@ -47,7 +47,7 @@ export default function RegisterPage() {
           </h1>
           <p className="text-gray-600">
             Deja gen kont?{" "}
-            <Link href="/login" className="text-blue-600 font-medium hover:underline">
+            <Link href="/login" className="text-[#1E8FE1] font-medium hover:underline">
               Konekte
             </Link>
           </p>
@@ -67,7 +67,7 @@ export default function RegisterPage() {
               value={form.name}
               onChange={handleChange}
               required
-              className="w-full border border-gray-300 rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full border border-gray-300 rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#1E8FE1]"
               placeholder="Marie Dupont"
             />
           </div>
@@ -82,7 +82,7 @@ export default function RegisterPage() {
               value={form.email}
               onChange={handleChange}
               required
-              className="w-full border border-gray-300 rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full border border-gray-300 rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#1E8FE1]"
               placeholder="ou@email.com"
             />
           </div>
@@ -98,7 +98,7 @@ export default function RegisterPage() {
               onChange={handleChange}
               required
               minLength={6}
-              className="w-full border border-gray-300 rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full border border-gray-300 rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#1E8FE1]"
               placeholder="Omwen 6 karaktè"
             />
           </div>
@@ -142,7 +142,7 @@ export default function RegisterPage() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-blue-600 text-white font-semibold py-3 rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50"
+            className="w-full bg-[#1E8FE1] text-white font-semibold py-3 rounded-lg hover:bg-[#142366] transition-colors disabled:opacity-50"
           >
             {loading ? "Kap kreye kont..." : "Kreye kont mwen"}
           </button>

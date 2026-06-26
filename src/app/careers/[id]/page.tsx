@@ -33,13 +33,13 @@ export default async function CareerDetailPage({
     <div className="max-w-4xl mx-auto px-4 py-12">
       <Link
         href="/careers"
-        className="text-blue-600 text-sm hover:underline mb-6 block"
+        className="text-[#1E8FE1] text-sm hover:underline mb-6 block"
       >
         ← Retounen nan karyè yo
       </Link>
 
       {/* Header */}
-      <div className="bg-gradient-to-br from-blue-600 to-blue-500 text-white rounded-2xl p-8 mb-8">
+      <div className="bg-gradient-to-br from-[#0B1D51] to-[#1E8FE1] text-white rounded-2xl p-8 mb-8">
         <span className="bg-white/20 text-white text-xs font-medium px-3 py-1 rounded-full mb-4 inline-block">
           {career.domain}
         </span>
@@ -67,7 +67,7 @@ export default async function CareerDetailPage({
               {career.subjects.map((s) => (
                 <span
                   key={s}
-                  className="bg-blue-50 text-blue-700 text-sm px-3 py-1 rounded-full"
+                  className="bg-[#EEF4FF] text-[#0B1D51] text-sm px-3 py-1 rounded-full"
                 >
                   {s}
                 </span>
@@ -102,7 +102,7 @@ export default async function CareerDetailPage({
                 {roadmap.steps.map((step, i) => (
                   <div key={step.grade} className="flex gap-4">
                     <div className="flex flex-col items-center">
-                      <div className="w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0">
+                      <div className="w-8 h-8 bg-[#1E8FE1] text-white rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0">
                         {i + 1}
                       </div>
                       {i < roadmap.steps.length - 1 && (
@@ -160,7 +160,7 @@ export default async function CareerDetailPage({
               {career.riasecCodes.map((c) => (
                 <span
                   key={c}
-                  className="bg-blue-100 text-blue-700 font-semibold px-3 py-1 rounded-full text-sm"
+                  className="bg-[#EEF4FF] text-[#0B1D51] font-semibold px-3 py-1 rounded-full text-sm"
                 >
                   {c} — {RIASEC_LABELS[c]}
                 </span>
@@ -171,7 +171,7 @@ export default async function CareerDetailPage({
             </p>
             <Link
               href="/quiz"
-              className="text-blue-600 text-sm font-medium hover:underline mt-2 block"
+              className="text-[#1E8FE1] text-sm font-medium hover:underline mt-2 block"
             >
               Fè tès RIASEC →
             </Link>
@@ -196,7 +196,7 @@ export default async function CareerDetailPage({
                     <div className="text-xs text-gray-500">
                       {p.universityName} · {p.country}
                     </div>
-                    <div className="text-xs text-blue-600 mt-0.5">
+                    <div className="text-xs text-[#1E8FE1] mt-0.5">
                       {p.duration} · {p.language}
                     </div>
                   </Link>
@@ -206,16 +206,16 @@ export default async function CareerDetailPage({
           )}
 
           {/* Mentors CTA */}
-          <div className="bg-blue-50 rounded-xl p-5 border border-blue-200">
-            <h3 className="font-semibold text-blue-900 mb-2">
+          <div className="bg-[#EEF4FF] rounded-xl p-5 border border-[#1E8FE1]/30">
+            <h3 className="font-semibold text-[#0B1D51] mb-2">
               🤝 Pale ak yon mentor
             </h3>
-            <p className="text-blue-700 text-sm mb-3">
+            <p className="text-[#0B1D51] text-sm mb-3">
               Jwenn yon pwofesyonèl nan {career.domain} pou konsèy pratik.
             </p>
             <Link
               href={`/mentors?domain=${career.domain}`}
-              className="bg-blue-600 text-white text-sm font-medium px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors inline-block"
+              className="bg-[#1E8FE1] text-white text-sm font-medium px-4 py-2 rounded-lg hover:bg-[#142366] transition-colors inline-block"
             >
               Wè mentor →
             </Link>

@@ -26,7 +26,7 @@ export default function DashboardPage() {
 
   const RIASEC_COLORS: Record<string, string> = {
     R: "bg-orange-500",
-    I: "bg-blue-500",
+    I: "bg-[#EEF4FF]0",
     A: "bg-purple-500",
     S: "bg-green-500",
     E: "bg-red-500",
@@ -66,7 +66,7 @@ export default function DashboardPage() {
   return (
     <div className="max-w-5xl mx-auto px-4 py-12">
       {/* Welcome */}
-      <div className="bg-gradient-to-br from-blue-600 to-blue-500 text-white rounded-2xl p-8 mb-8">
+      <div className="bg-gradient-to-br from-[#0B1D51] to-[#142366] text-white rounded-2xl p-8 mb-8">
         <h1 className="text-2xl font-bold mb-1">
           Bonjou, {user.name.split(" ")[0]}! 👋
         </h1>
@@ -123,7 +123,7 @@ export default function DashboardPage() {
                     {!s.done && s.href && (
                       <Link
                         href={s.href}
-                        className="text-xs text-blue-600 hover:underline"
+                        className="text-xs text-[#1E8FE1] hover:underline"
                       >
                         Fè sa kounye a →
                       </Link>
@@ -139,7 +139,7 @@ export default function DashboardPage() {
         <div className="lg:col-span-2 space-y-6">
           {/* Quiz CTA or Results */}
           {!user.quizCompleted ? (
-            <div className="bg-blue-50 border border-blue-200 rounded-xl p-6">
+            <div className="bg-[#EEF4FF] border border-[#1E8FE1]/30 rounded-xl p-6">
               <h2 className="font-semibold text-gray-900 mb-2">
                 🧠 Fè tès oryantasyon ou
               </h2>
@@ -149,7 +149,7 @@ export default function DashboardPage() {
               </p>
               <Link
                 href="/quiz"
-                className="bg-blue-600 text-white text-sm font-medium px-5 py-2 rounded-lg hover:bg-blue-700 transition-colors inline-block"
+                className="bg-[#1E8FE1] text-white text-sm font-medium px-5 py-2 rounded-lg hover:bg-[#142366] transition-colors inline-block"
               >
                 Kòmanse tès la →
               </Link>
@@ -174,13 +174,13 @@ export default function DashboardPage() {
                         {career.domain} · {career.salary}
                       </div>
                     </div>
-                    <span className="text-blue-600 text-sm">→</span>
+                    <span className="text-[#1E8FE1] text-sm">→</span>
                   </Link>
                 ))}
               </div>
               <Link
                 href="/quiz"
-                className="text-blue-600 text-sm hover:underline mt-3 block"
+                className="text-[#1E8FE1] text-sm hover:underline mt-3 block"
               >
                 Refè tès la
               </Link>

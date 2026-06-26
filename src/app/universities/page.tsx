@@ -47,7 +47,7 @@ export default function UniversitiesPage() {
           placeholder="Chèche pwogram oswa inivèsite..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          className="w-full border border-gray-300 rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="w-full border border-gray-300 rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#1E8FE1]"
         />
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
           <div>
@@ -113,7 +113,7 @@ export default function UniversitiesPage() {
           <Link
             key={prog.id}
             href={`/universities/${prog.universityId}`}
-            className="bg-white rounded-xl p-6 shadow-sm border border-gray-200 hover:shadow-md transition-all hover:border-blue-300"
+            className="bg-white rounded-xl p-6 shadow-sm border border-gray-200 hover:shadow-md transition-all hover:border-[#1E8FE1]"
           >
             <div className="flex justify-between items-start mb-3">
               <div>
@@ -121,7 +121,7 @@ export default function UniversitiesPage() {
                 <p className="text-gray-500 text-sm">{prog.universityName}</p>
               </div>
               <div className="flex flex-col items-end gap-1">
-                <span className="bg-blue-100 text-blue-700 text-xs px-2 py-0.5 rounded-full">
+                <span className="bg-[#EEF4FF] text-[#1E8FE1] text-xs px-2 py-0.5 rounded-full">
                   {prog.domain}
                 </span>
                 {prog.scholarship && (
@@ -151,7 +151,7 @@ export default function UniversitiesPage() {
                 </span>
                 <span className="text-gray-400"> /{prog.currency}</span>
               </div>
-              <span className="text-blue-600 text-sm font-medium">
+              <span className="text-[#1E8FE1] text-sm font-medium">
                 Wè detay →
               </span>
             </div>

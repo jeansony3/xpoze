@@ -15,70 +15,66 @@ export default function Navbar() {
     { href: "/universities", label: "Inivèsite" },
     { href: "/mentors", label: "Mentor" },
     { href: "/podcasts", label: "Podcast" },
-    { href: "/live", label: "🔴 Live" },
+    { href: "/live", label: "Live" },
   ];
 
   return (
-    <nav className="bg-white/80 backdrop-blur-md border-b border-indigo-100 sticky top-0 z-50 shadow-sm">
-      <div className="max-w-6xl mx-auto px-4 flex items-center justify-between h-16">
+    <nav className="bg-[#0B1D51] border-b border-white/10 sticky top-0 z-50">
+      <div className="max-w-7xl mx-auto px-5 flex items-center justify-between h-16">
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-2">
-          <div className="w-8 h-8 bg-gradient-to-br from-indigo-600 to-orange-500 rounded-lg flex items-center justify-center">
-            <span className="text-white font-black text-sm">X</span>
-          </div>
-          <span className="text-xl font-bold text-gray-900 tracking-tight">
-            poze
-          </span>
+        <Link href="/" className="flex items-center gap-1.5 group">
+          <span className="text-[#1E8FE1] font-black text-2xl tracking-tight group-hover:text-[#4AAEF0] transition-colors">X</span>
+          <span className="text-white font-bold text-xl tracking-tight">poze</span>
         </Link>
 
         {/* Desktop links */}
-        <div className="hidden md:flex items-center gap-1">
+        <div className="hidden lg:flex items-center gap-0.5">
           {links.map((l) => (
             <Link
               key={l.href}
               href={l.href}
-              className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
+              className={`px-4 py-2 rounded-lg text-sm font-medium transition-all relative ${
                 pathname.startsWith(l.href)
-                  ? "bg-indigo-50 text-indigo-700"
-                  : "text-gray-600 hover:text-gray-900 hover:bg-gray-50"
-              }`}
+                  ? "text-[#1E8FE1] bg-white/10"
+                  : "text-white/70 hover:text-white hover:bg-white/8"
+              } ${l.href === "/live" ? "flex items-center gap-1.5" : ""}`}
             >
+              {l.href === "/live" && (
+                <span className="w-2 h-2 bg-red-500 rounded-full animate-pulse" />
+              )}
               {l.label}
             </Link>
           ))}
         </div>
 
         {/* Auth */}
-        <div className="hidden md:flex items-center gap-3">
+        <div className="hidden lg:flex items-center gap-3">
           {user ? (
             <>
               <Link
                 href="/dashboard"
-                className="flex items-center gap-2 text-sm text-gray-700 font-medium hover:text-indigo-600 transition-colors"
+                className="flex items-center gap-2 text-sm text-white/80 font-medium hover:text-white transition-colors"
               >
-                <div className="w-7 h-7 bg-indigo-600 rounded-full flex items-center justify-center text-white text-xs font-bold">
+                <div className="w-7 h-7 bg-[#1E8FE1] rounded-full flex items-center justify-center text-white text-xs font-bold">
                   {user.name.charAt(0).toUpperCase()}
                 </div>
                 {user.name.split(" ")[0]}
               </Link>
               <button
                 onClick={logout}
-                className="text-sm text-gray-400 hover:text-red-500 transition-colors"
+                className="text-sm text-white/40 hover:text-red-400 transition-colors"
               >
                 Dekonekte
               </button>
             </>
           ) : (
             <>
-              <Link
-                href="/login"
-                className="text-sm text-gray-600 font-medium hover:text-indigo-600 transition-colors"
-              >
+              <Link href="/login" className="text-sm text-white/70 font-medium hover:text-white transition-colors">
                 Konekte
               </Link>
               <Link
                 href="/register"
-                className="bg-indigo-600 text-white text-sm font-semibold px-4 py-2 rounded-xl hover:bg-indigo-700 transition-colors shadow-sm"
+                className="bg-[#1E8FE1] hover:bg-[#4AAEF0] text-white text-sm font-bold px-5 py-2 rounded-xl transition-colors shadow-lg shadow-blue-500/20"
               >
                 Enskri gratis
               </Link>
@@ -88,54 +84,45 @@ export default function Navbar() {
 
         {/* Mobile toggle */}
         <button
-          className="md:hidden w-9 h-9 flex flex-col items-center justify-center gap-1.5"
+          className="lg:hidden p-2 text-white/70 hover:text-white"
           onClick={() => setMenuOpen(!menuOpen)}
         >
-          <span
-            className={`w-5 h-0.5 bg-gray-700 rounded transition-all ${menuOpen ? "rotate-45 translate-y-2" : ""}`}
-          />
-          <span
-            className={`w-5 h-0.5 bg-gray-700 rounded transition-all ${menuOpen ? "opacity-0" : ""}`}
-          />
-          <span
-            className={`w-5 h-0.5 bg-gray-700 rounded transition-all ${menuOpen ? "-rotate-45 -translate-y-2" : ""}`}
-          />
+          <div className="w-5 space-y-1.5">
+            <span className={`block w-full h-0.5 bg-current rounded transition-all ${menuOpen ? "rotate-45 translate-y-2" : ""}`} />
+            <span className={`block w-full h-0.5 bg-current rounded transition-all ${menuOpen ? "opacity-0" : ""}`} />
+            <span className={`block w-full h-0.5 bg-current rounded transition-all ${menuOpen ? "-rotate-45 -translate-y-2" : ""}`} />
+          </div>
         </button>
       </div>
 
       {/* Mobile menu */}
       {menuOpen && (
-        <div className="md:hidden bg-white border-t border-gray-100 px-4 py-4 space-y-1">
+        <div className="lg:hidden bg-[#142366] border-t border-white/10 px-5 py-4 space-y-1">
           {links.map((l) => (
             <Link
               key={l.href}
               href={l.href}
-              className={`block px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+              className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium transition-colors ${
                 pathname.startsWith(l.href)
-                  ? "bg-indigo-50 text-indigo-700"
-                  : "text-gray-700 hover:bg-gray-50"
+                  ? "bg-[#1E8FE1]/20 text-[#4AAEF0]"
+                  : "text-white/70 hover:text-white hover:bg-white/5"
               }`}
               onClick={() => setMenuOpen(false)}
             >
+              {l.href === "/live" && <span className="w-2 h-2 bg-red-500 rounded-full animate-pulse" />}
               {l.label}
             </Link>
           ))}
-          <div className="pt-3 border-t border-gray-100 flex gap-3 px-4">
+          <div className="pt-3 border-t border-white/10 flex gap-3 px-2 mt-2">
             {user ? (
               <>
-                <Link href="/dashboard" className="text-sm text-indigo-600 font-medium">
-                  Tableau de bord
-                </Link>
-                <button onClick={logout} className="text-sm text-red-500">
-                  Dekonekte
-                </button>
+                <Link href="/dashboard" className="text-sm text-[#1E8FE1] font-medium">Tableau de bord</Link>
+                <button onClick={logout} className="text-sm text-red-400">Dekonekte</button>
               </>
             ) : (
               <>
-                <Link href="/login" className="text-sm text-gray-700">Konekte</Link>
-                <Link href="/register" className="text-sm text-indigo-600 font-semibold">
-                  Enskri gratis →
-                </Link>
+                <Link href="/login" className="text-sm text-white/70">Konekte</Link>
+                <Link href="/register" className="text-sm text-[#1E8FE1] font-bold">Enskri gratis →</Link>
               </>
             )}
           </div>

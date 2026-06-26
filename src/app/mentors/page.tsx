@@ -73,13 +73,13 @@ export default function MentorsPage() {
           >
             {/* Avatar + name */}
             <div className="flex items-center gap-4 mb-4">
-              <div className="w-14 h-14 bg-blue-600 text-white rounded-full flex items-center justify-center text-lg font-bold flex-shrink-0">
+              <div className="w-14 h-14 bg-[#1E8FE1] text-white rounded-full flex items-center justify-center text-lg font-bold flex-shrink-0">
                 {mentor.avatar}
               </div>
               <div>
                 <h2 className="font-semibold text-gray-900">{mentor.name}</h2>
                 <p className="text-gray-500 text-sm">{mentor.profession}</p>
-                <span className="bg-blue-100 text-blue-700 text-xs px-2 py-0.5 rounded-full mt-1 inline-block">
+                <span className="bg-[#EEF4FF] text-[#1E8FE1] text-xs px-2 py-0.5 rounded-full mt-1 inline-block">
                   {mentor.domain}
                 </span>
               </div>
@@ -118,7 +118,7 @@ export default function MentorsPage() {
               ) : (
                 <button
                   onClick={() => handleRequest(mentor.id)}
-                  className="w-full bg-blue-600 text-white text-sm font-medium px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors"
+                  className="w-full bg-[#1E8FE1] text-white text-sm font-medium px-4 py-2 rounded-lg hover:bg-[#142366] transition-colors"
                 >
                   Mande yon sesyon
                 </button>

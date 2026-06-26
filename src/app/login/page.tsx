@@ -43,17 +43,17 @@ export default function LoginPage() {
           <h1 className="text-3xl font-bold text-gray-900 mb-2">Konekte</h1>
           <p className="text-gray-600">
             Pa gen kont?{" "}
-            <Link href="/register" className="text-blue-600 font-medium hover:underline">
+            <Link href="/register" className="text-[#1E8FE1] font-medium hover:underline">
               Enskri gratis
             </Link>
           </p>
         </div>
 
         {/* Demo credentials hint */}
-        <div className="bg-blue-50 border border-blue-200 rounded-xl p-4 mb-6 text-sm">
-          <p className="font-semibold text-blue-800 mb-1">Kont demo:</p>
-          <p className="text-blue-700">📧 eleve@demo.ht · 🔑 demo123</p>
-          <p className="text-blue-700">📧 mentor@demo.ht · 🔑 demo123</p>
+        <div className="bg-[#EEF4FF] border border-[#1E8FE1]/30 rounded-xl p-4 mb-6 text-sm">
+          <p className="font-semibold text-[#0B1D51] mb-1">Kont demo:</p>
+          <p className="text-[#1E8FE1]">📧 eleve@demo.ht · 🔑 demo123</p>
+          <p className="text-[#1E8FE1]">📧 mentor@demo.ht · 🔑 demo123</p>
         </div>
 
         <form onSubmit={handleSubmit} className="bg-white rounded-2xl p-8 shadow-sm border border-gray-200 space-y-5">
@@ -72,7 +72,7 @@ export default function LoginPage() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
-              className="w-full border border-gray-300 rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full border border-gray-300 rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#1E8FE1]"
               placeholder="ou@email.com"
             />
           </div>
@@ -86,7 +86,7 @@ export default function LoginPage() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
-              className="w-full border border-gray-300 rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full border border-gray-300 rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#1E8FE1]"
               placeholder="••••••••"
             />
           </div>
@@ -94,7 +94,7 @@ export default function LoginPage() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-blue-600 text-white font-semibold py-3 rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50"
+            className="w-full bg-[#1E8FE1] text-white font-semibold py-3 rounded-lg hover:bg-[#142366] transition-colors disabled:opacity-50"
           >
             {loading ? "Kap konekte..." : "Konekte"}
           </button>

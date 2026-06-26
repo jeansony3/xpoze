@@ -21,7 +21,7 @@ export default async function UniversityDetailPage({
     <div className="max-w-4xl mx-auto px-4 py-12">
       <Link
         href="/universities"
-        className="text-blue-600 text-sm hover:underline mb-6 block"
+        className="text-[#1E8FE1] text-sm hover:underline mb-6 block"
       >
         ← Retounen nan inivèsite yo
       </Link>
@@ -41,7 +41,7 @@ export default async function UniversityDetailPage({
               <span>🌐 {university.languages.join(", ")}</span>
             </div>
           </div>
-          <div className="w-16 h-16 bg-blue-100 rounded-xl flex items-center justify-center text-blue-600 font-bold text-xl">
+          <div className="w-16 h-16 bg-[#EEF4FF] rounded-xl flex items-center justify-center text-[#1E8FE1] font-bold text-xl">
             {university.name.charAt(0)}
           </div>
         </div>
@@ -64,7 +64,7 @@ export default async function UniversityDetailPage({
                 <p className="text-gray-500 text-sm">{prog.nameHT}</p>
               </div>
               <div className="flex gap-2 flex-wrap justify-end">
-                <span className="bg-blue-100 text-blue-700 text-xs px-2 py-0.5 rounded-full">
+                <span className="bg-[#EEF4FF] text-blue-700 text-xs px-2 py-0.5 rounded-full">
                   {prog.level}
                 </span>
                 {prog.scholarship && (
@@ -123,7 +123,7 @@ export default async function UniversityDetailPage({
         )}
       </div>
 
-      <div className="mt-8 bg-blue-50 rounded-xl p-6 border border-blue-200">
+      <div className="mt-8 bg-blue-50 rounded-xl p-6 border border-[#1E8FE1]/30">
         <h3 className="font-semibold text-blue-900 mb-2">
           Bezwen plis enfòmasyon?
         </h3>
@@ -133,7 +133,7 @@ export default async function UniversityDetailPage({
         </p>
         <Link
           href="/mentors"
-          className="bg-blue-600 text-white text-sm font-medium px-4 py-2 rounded-lg hover:bg-blue-700 inline-block"
+          className="bg-[#1E8FE1] text-white text-sm font-medium px-4 py-2 rounded-lg hover:bg-[#142366] inline-block"
         >
           Jwenn yon mentor →
         </Link>

@@ -36,7 +36,7 @@ export default function CareersPage() {
           placeholder="Chèche yon karyè..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          className="flex-1 border border-gray-300 rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="flex-1 border border-gray-300 rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#1E8FE1]"
         />
         <div className="flex gap-2 flex-wrap">
           {domains.map((d) => (
@@ -45,7 +45,7 @@ export default function CareersPage() {
               onClick={() => setFilter(d)}
               className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
                 filter === d
-                  ? "bg-blue-600 text-white"
+                  ? "bg-[#1E8FE1] text-white"
                   : "bg-white text-gray-700 border border-gray-300 hover:bg-gray-50"
               }`}
             >
@@ -60,7 +60,7 @@ export default function CareersPage() {
           <Link
             key={career.id}
             href={`/careers/${career.id}`}
-            className="bg-white rounded-xl p-6 shadow-sm border border-gray-200 hover:shadow-md transition-all hover:border-blue-300"
+            className="bg-white rounded-xl p-6 shadow-sm border border-gray-200 hover:shadow-md transition-all hover:border-[#1E8FE1]"
           >
             <div className="flex items-start justify-between mb-3">
               <div>
@@ -84,7 +84,7 @@ export default function CareersPage() {
             </div>
             <div className="flex justify-between text-sm">
               <span className="text-green-600 font-medium">💰 {career.salary}</span>
-              <span className="text-blue-600 font-medium">Wè roadmap →</span>
+              <span className="text-[#1E8FE1] font-medium">Wè roadmap →</span>
             </div>
           </Link>
         ))}
