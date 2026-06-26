@@ -1,92 +1,65 @@
 import type { Metadata } from "next";
-import { Geist } from "next/font/google";
+import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
-import Link from "next/link";
 
 const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
+const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Vijend Haiti — Bati Ayiti Ansanm",
-  description:
-    "Vijend Haiti se yon òganizasyon à but non lucratif ki dedye a edikasyon, devlopman kominote, ak ranfòsman kapasite jèn Ayiti depi me 2020.",
-};
-
-const footerLinks = {
-  Organisation: [
-    { href: "/about", label: "Kiyès Nou" },
-    { href: "/about#team", label: "Ekip Fondatè" },
-    { href: "/about#history", label: "Istwa Nou" },
-    { href: "/impact", label: "Enpak Nou" },
-  ],
-  Pwogram: [
-    { href: "/programs#education", label: "Edikasyon" },
-    { href: "/programs#youth", label: "Jèn" },
-    { href: "/programs#community", label: "Kominote" },
-    { href: "/programs#economic", label: "Ekonomik" },
-  ],
-  "Patisipe": [
-    { href: "/contact#volunteer", label: "Volontè" },
-    { href: "/contact#donate", label: "Fè yon Don" },
-    { href: "/contact#partner", label: "Patnè" },
-    { href: "/contact", label: "Kontakte Nou" },
-  ],
+  title: "Xpoze — Transforming Career Orientation into Opportunity",
+  description: "Platfòm dijital ki ede elèv finisan Ayiti dekouvri karyè yo, jwenn inivèsite, ak konekte ak mentor pwofesyonèl.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="ht" className={geistSans.variable}>
-      <body className="antialiased min-h-screen bg-[#F8F6F0] flex flex-col">
+    <html lang="fr" className={`${geistSans.variable} ${geistMono.variable}`}>
+      <body className="antialiased min-h-screen bg-[#F0F5FF] flex flex-col">
         <Navbar />
         <main className="flex-1">{children}</main>
-
-        <footer className="bg-[#002B6E] text-white pt-16 pb-8 relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-96 h-96 opacity-5 pointer-events-none">
-            <div className="absolute top-8 right-8 w-48 h-48 border-4 border-[#F5A623] rounded-full" />
-            <div className="absolute top-24 right-32 w-24 h-24 border-2 border-[#CE1126] rounded-full" />
+        <footer className="bg-[#0B1D51] text-white pt-16 pb-8 relative overflow-hidden">
+          {/* Geometric decoration */}
+          <div className="absolute bottom-0 right-0 w-96 h-96 opacity-5 pointer-events-none">
+            <div className="absolute bottom-8 right-8 w-40 h-40 border-4 border-white rounded-full" />
+            <div className="absolute bottom-16 right-32 w-20 h-20 border-2 border-[#1E8FE1] rounded-full" />
+            <div className="absolute bottom-32 right-12 w-10 h-10 bg-[#1E8FE1] rounded-sm rotate-45" />
           </div>
-
           <div className="max-w-7xl mx-auto px-5 grid grid-cols-1 md:grid-cols-4 gap-10 mb-12 relative">
-            {/* Brand */}
-            <div className="md:col-span-1">
-              <div className="flex items-center gap-2.5 mb-4">
-                <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-[#F5A623] to-[#CE1126] flex items-center justify-center">
-                  <span className="text-white font-black text-sm">VH</span>
-                </div>
-                <span className="text-white font-black text-lg">Vijend Haiti</span>
+            <div className="md:col-span-2">
+              <div className="flex items-center gap-1 mb-4">
+                <span className="text-[#1E8FE1] font-black text-2xl">X</span>
+                <span className="text-white font-bold text-xl">poze</span>
               </div>
-              <p className="text-white/50 text-sm leading-relaxed mb-5">
-                Bati yon Ayiti pi fò — ansanm, pa nan pawòl men pa aksyon reyèl nan kominote nou yo.
+              <p className="text-white/50 text-sm leading-relaxed max-w-xs mb-4">
+                Transforming Career Orientation into Opportunity — pou chak elèv Ayiti.
               </p>
-              <p className="text-white/30 text-xs">Fondé en mai 2020 · Port-au-Prince, Haïti</p>
-              <div className="flex gap-3 mt-4">
-                <a href="https://www.facebook.com/vijendhaiti" target="_blank" rel="noopener noreferrer"
-                  className="w-8 h-8 bg-white/10 rounded-lg flex items-center justify-center text-white/60 hover:text-white hover:bg-[#1877F2] transition-all text-xs font-bold">
-                  f
-                </a>
-              </div>
+              <p className="text-white/30 text-xs">Xpozer: Marc-Kendy Losier</p>
             </div>
-
-            {/* Links */}
-            {Object.entries(footerLinks).map(([title, items]) => (
-              <div key={title}>
-                <h4 className="font-bold text-xs tracking-widest uppercase text-[#F5A623] mb-4">{title}</h4>
-                <ul className="text-white/50 text-sm space-y-2.5">
-                  {items.map((item) => (
-                    <li key={item.href}>
-                      <Link href={item.href} className="hover:text-white transition-colors">
-                        {item.label}
-                      </Link>
+            <div>
+              <h4 className="font-bold text-xs tracking-widest uppercase text-[#1E8FE1] mb-4">Platfòm</h4>
+              <ul className="text-white/50 text-sm space-y-2.5">
+                {["/quiz/Tès oryantasyon","/careers/Karyè","/universities/Inivèsite","/mentors/Mentor","/immigration/Immigration","/podcasts/Podcast","/live/Sesyon Live"].map(item => {
+                  const [href, label] = item.split("/").slice(1).reduce((a,b,i,arr) => i===0 ? [`/${b}`,""] : [a[0], arr.slice(1).join("/")], ["",""]) as [string,string];
+                  const parts = item.split("/");
+                  return (
+                    <li key={parts[1]}>
+                      <a href={`/${parts[1]}`} className="hover:text-white transition-colors">{parts[2]}</a>
                     </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
+                  );
+                })}
+              </ul>
+            </div>
+            <div>
+              <h4 className="font-bold text-xs tracking-widest uppercase text-[#1E8FE1] mb-4">Kontakt</h4>
+              <ul className="text-white/50 text-sm space-y-2.5">
+                <li>info@xpoze.ht</li>
+                <li>Port-au-Prince, Haïti</li>
+              </ul>
+            </div>
           </div>
-
           <div className="max-w-7xl mx-auto px-5 pt-6 border-t border-white/10 flex flex-col sm:flex-row justify-between items-center gap-3">
-            <p className="text-white/30 text-xs">© 2025 Vijend Haiti. Tout dwa rezève.</p>
-            <p className="text-white/30 text-xs">Fondé par Jean Sony Joseph, Edmond Simplice & Ilioreste Charles</p>
+            <p className="text-white/30 text-xs">© 2025 Xpoze. Tout dwa rezève.</p>
+            <p className="text-white/30 text-xs">Transforming Career Orientation into Opportunity</p>
           </div>
         </footer>
       </body>
