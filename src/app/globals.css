@@ -1,15 +1,16 @@
 @import "tailwindcss";
 
 :root {
-  --navy: #0B1D51;
-  --navy-mid: #142366;
-  --navy-light: #1a2d7a;
-  --blue: #1E8FE1;
-  --blue-light: #4AAEF0;
-  --cyan: #00C6FF;
-  --background: #F0F5FF;
+  --navy: #002B6E;
+  --navy-mid: #003587;
+  --navy-light: #0044AA;
+  --red: #CE1126;
+  --red-light: #E8304A;
+  --gold: #F5A623;
+  --gold-light: #F7C05A;
+  --background: #F8F6F0;
   --surface: #ffffff;
-  --foreground: #0B1D51;
+  --foreground: #1A1A2E;
 }
 
 @theme inline {
@@ -27,35 +28,58 @@ body {
   font-family: var(--font-geist-sans), system-ui, sans-serif;
 }
 
-/* Geometric bg pattern */
 .geo-bg {
   background-image:
-    radial-gradient(circle at 20% 50%, rgba(30,143,225,0.08) 0%, transparent 50%),
-    radial-gradient(circle at 80% 20%, rgba(0,198,255,0.06) 0%, transparent 40%),
-    linear-gradient(135deg, rgba(11,29,81,0.03) 0%, transparent 60%);
+    radial-gradient(circle at 20% 50%, rgba(0,43,110,0.06) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(245,166,35,0.06) 0%, transparent 40%),
+    linear-gradient(135deg, rgba(0,43,110,0.03) 0%, transparent 60%);
 }
 
-/* Card hover */
 .card-lift {
   transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 .card-lift:hover {
   transform: translateY(-3px);
-  box-shadow: 0 12px 40px rgba(11,29,81,0.12);
+  box-shadow: 0 12px 40px rgba(0,43,110,0.12);
 }
 
-/* Gradient text */
-.blue-gradient-text {
-  background: linear-gradient(135deg, #1E8FE1 0%, #00C6FF 100%);
+.gold-gradient-text {
+  background: linear-gradient(135deg, #F5A623 0%, #F7C05A 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
-/* Blueprint grid overlay */
-.blueprint-grid {
-  background-image: 
-    linear-gradient(rgba(30,143,225,0.06) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(30,143,225,0.06) 1px, transparent 1px);
+.red-gradient-text {
+  background: linear-gradient(135deg, #CE1126 0%, #E8304A 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.haiti-grid {
+  background-image:
+    linear-gradient(rgba(0,43,110,0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,43,110,0.05) 1px, transparent 1px);
   background-size: 40px 40px;
 }
+
+.wave-divider {
+  position: relative;
+}
+.wave-divider::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  right: 0;
+  height: 60px;
+  background: white;
+  clip-path: ellipse(55% 100% at 50% 100%);
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+.float-anim { animation: float 4s ease-in-out infinite; }
