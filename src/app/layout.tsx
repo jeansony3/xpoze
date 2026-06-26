@@ -38,7 +38,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <div>
               <h4 className="font-bold text-xs tracking-widest uppercase text-[#1E8FE1] mb-4">Platfòm</h4>
               <ul className="text-white/50 text-sm space-y-2.5">
-                {["/quiz/Tès oryantasyon","/careers/Karyè","/universities/Inivèsite","/mentors/Mentor","/podcasts/Podcast","/live/Sesyon Live"].map(item => {
+                {["/quiz/Tès oryantasyon","/careers/Karyè","/universities/Inivèsite","/mentors/Mentor","/immigration/Immigration","/podcasts/Podcast","/live/Sesyon Live"].map(item => {
                   const [href, label] = item.split("/").slice(1).reduce((a,b,i,arr) => i===0 ? [`/${b}`,""] : [a[0], arr.slice(1).join("/")], ["",""]) as [string,string];
                   const parts = item.split("/");
                   return (

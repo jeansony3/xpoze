@@ -13,6 +13,7 @@ type Episode = {
   audioUrl: string | null;
   youtubeId: string | null;
   tags: string[];
+  type: "audio" | "video";
 };
 
 const EPISODES: Episode[] = [
@@ -27,8 +28,9 @@ const EPISODES: Episode[] = [
     description:
       "Jean-Baptiste pataje vwayaj li depi lekòl teknik ann Ayiti rive nan yon karrye tech aletranje. Konsèy pratik sou kòman aprann pwograme, kreye yon portfolio, ak jwenn premye travay ou nan domèn la.",
     audioUrl: null,
-    youtubeId: null,
+    youtubeId: "dQw4w9WgXcQ",
     tags: ["Tech", "Étude à l'étranger", "Carrière"],
+    type: "video",
   },
   {
     id: "ep2",
@@ -43,6 +45,7 @@ const EPISODES: Episode[] = [
     audioUrl: null,
     youtubeId: null,
     tags: ["Santé", "UEH", "Médecine"],
+    type: "audio",
   },
   {
     id: "ep3",
@@ -55,8 +58,9 @@ const EPISODES: Episode[] = [
     description:
       "Sophia eksplike kòman dwa des affaires se youn nan espesyalizasyon ki pi peye nan rejyon an. Li pale sou UEH, Paris II, ak kòman konbine de kilti juridik.",
     audioUrl: null,
-    youtubeId: null,
+    youtubeId: "dQw4w9WgXcQ",
     tags: ["Droit", "Affaires", "International"],
+    type: "video",
   },
   {
     id: "ep4",
@@ -71,6 +75,7 @@ const EPISODES: Episode[] = [
     audioUrl: null,
     youtubeId: null,
     tags: ["Agriculture", "Entrepreneuriat", "Durabilité"],
+    type: "audio",
   },
   {
     id: "ep5",
@@ -83,8 +88,9 @@ const EPISODES: Episode[] = [
     description:
       "Nadège diskite sou wòl achitèk nan konstwi vil ki rezistan kont tranbleman tè ak inondasyon. Enpòtans dizèn sosyal ak achitekti abòdab.",
     audioUrl: null,
-    youtubeId: null,
+    youtubeId: "dQw4w9WgXcQ",
     tags: ["Architecture", "Résilience", "Urban"],
+    type: "video",
   },
   {
     id: "ep6",
@@ -99,6 +105,7 @@ const EPISODES: Episode[] = [
     audioUrl: null,
     youtubeId: null,
     tags: ["Éducation", "Pédagogie", "Impact"],
+    type: "audio",
   },
 ];
 
@@ -115,10 +122,15 @@ const DOMAIN_COLORS: Record<string, string> = {
 
 export default function PodcastsPage() {
   const [filter, setFilter] = useState("Tous");
+  const [typeFilter, setTypeFilter] = useState<"Tous" | "Audio" | "Vidéo">("Tous");
   const [playing, setPlaying] = useState<string | null>(null);
 
   const filtered = EPISODES.filter(
-    (e) => filter === "Tous" || e.domain === filter
+    (e) =>
+      (filter === "Tous" || e.domain === filter) &&
+      (typeFilter === "Tous" ||
+        (typeFilter === "Audio" && e.type === "audio") ||
+        (typeFilter === "Vidéo" && e.type === "video"))
   );
 
   return (
@@ -158,13 +170,19 @@ export default function PodcastsPage() {
               }
               className="flex items-center gap-2 bg-white text-indigo-700 font-bold px-6 py-3 rounded-xl hover:bg-indigo-50 transition-colors"
             >
-              {playing === EPISODES[0].id ? "⏸ Pause" : "▶ Koute kounye a"}
+              {playing === EPISODES[0].id ? "⏸ Pause" : (EPISODES[0].type === "video" ? "▶ Gade kounye a" : "▶ Koute kounye a")}
             </button>
-            <span className="text-indigo-300 text-sm">
-              ⏱ {EPISODES[0].duration}
+            <span className="text-indigo-300 text-sm">⏱ {EPISODES[0].duration}</span>
+            <span className="text-xs bg-white/20 px-2 py-0.5 rounded-full">
+              {EPISODES[0].type === "video" ? "📹 Vidéo" : "🎵 Audio"}
             </span>
           </div>
-          {playing === EPISODES[0].id && (
+          {playing === EPISODES[0].id && EPISODES[0].type === "video" && (
+            <div className="mt-4 bg-black rounded-xl overflow-hidden aspect-video max-w-xl flex items-center justify-center">
+              <div className="text-white/50 text-sm">▶ Vidéo ap chaje... (demo)</div>
+            </div>
+          )}
+          {playing === EPISODES[0].id && EPISODES[0].type === "audio" && (
             <div className="mt-4 bg-white/10 rounded-xl p-4">
               <div className="flex items-center gap-3">
                 <div className="flex gap-0.5">
@@ -176,16 +194,31 @@ export default function PodcastsPage() {
                     />
                   ))}
                 </div>
-                <span className="text-white/70 text-sm">
-                  Kap jwe... (demo mode)
-                </span>
+                <span className="text-white/70 text-sm">Kap jwe... (demo mode)</span>
               </div>
             </div>
           )}
         </div>
       </div>
 
-      {/* Filter */}
+      {/* Type filter */}
+      <div className="flex gap-2 mb-4">
+        {(["Tous", "Audio", "Vidéo"] as const).map((t) => (
+          <button
+            key={t}
+            onClick={() => setTypeFilter(t)}
+            className={`px-4 py-2 rounded-xl text-sm font-semibold transition-colors ${
+              typeFilter === t
+                ? "bg-[#0B1D51] text-white"
+                : "bg-white text-gray-600 border border-gray-200 hover:border-indigo-300"
+            }`}
+          >
+            {t === "Audio" ? "🎵 Audio" : t === "Vidéo" ? "📹 Vidéo" : "🔀 Tous"}
+          </button>
+        ))}
+      </div>
+
+      {/* Domain Filter */}
       <div className="flex gap-2 flex-wrap mb-8">
         {domains.map((d) => (
           <button
@@ -210,34 +243,48 @@ export default function PodcastsPage() {
             className="bg-white rounded-2xl p-6 border border-gray-100 hover:border-indigo-200 transition-all hover:shadow-md"
           >
             <div className="flex gap-5 items-start">
-              {/* Number */}
-              <div className="w-12 h-12 rounded-xl bg-indigo-50 text-indigo-600 font-black text-lg flex items-center justify-center flex-shrink-0">
-                {String(i + 1).padStart(2, "0")}
-              </div>
+              {ep.type === "video" ? (
+                /* Video thumbnail */
+                <div
+                  className="w-24 h-16 bg-gray-900 rounded-xl flex-shrink-0 flex items-center justify-center relative overflow-hidden cursor-pointer group"
+                  onClick={() => setPlaying(playing === ep.id ? null : ep.id)}
+                >
+                  <div className="absolute inset-0 bg-gradient-to-br from-indigo-800 to-indigo-600 opacity-70" />
+                  <div className="relative w-8 h-8 bg-white/90 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
+                    <span className="text-indigo-700 text-sm ml-0.5">▶</span>
+                  </div>
+                  <span className="absolute bottom-1 right-1 text-white text-xs bg-black/60 px-1 rounded">
+                    {ep.duration}
+                  </span>
+                </div>
+              ) : (
+                /* Audio number */
+                <div className="w-12 h-12 rounded-xl bg-indigo-50 text-indigo-600 font-black text-lg flex items-center justify-center flex-shrink-0">
+                  {String(i + 1).padStart(2, "0")}
+                </div>
+              )}
               <div className="flex-1 min-w-0">
                 <div className="flex items-start justify-between gap-3 mb-1">
-                  <h3 className="font-bold text-gray-900 leading-tight">
-                    {ep.title}
-                  </h3>
-                  <span
-                    className={`text-xs font-semibold px-2 py-0.5 rounded-full flex-shrink-0 ${DOMAIN_COLORS[ep.domain] || "bg-gray-100 text-gray-600"}`}
-                  >
-                    {ep.domain}
-                  </span>
+                  <h3 className="font-bold text-gray-900 leading-tight">{ep.title}</h3>
+                  <div className="flex gap-1 flex-shrink-0">
+                    <span className="text-xs bg-gray-100 text-gray-500 px-2 py-0.5 rounded-full">
+                      {ep.type === "video" ? "📹" : "🎵"}
+                    </span>
+                    <span
+                      className={`text-xs font-semibold px-2 py-0.5 rounded-full ${DOMAIN_COLORS[ep.domain] || "bg-gray-100 text-gray-600"}`}
+                    >
+                      {ep.domain}
+                    </span>
+                  </div>
                 </div>
                 <p className="text-indigo-600 text-sm font-medium mb-1">
                   {ep.guest} — <span className="text-gray-500 font-normal">{ep.role}</span>
                 </p>
-                <p className="text-gray-500 text-sm leading-relaxed mb-4">
-                  {ep.description}
-                </p>
+                <p className="text-gray-500 text-sm leading-relaxed mb-4">{ep.description}</p>
                 <div className="flex items-center justify-between">
                   <div className="flex gap-2 flex-wrap">
                     {ep.tags.map((t) => (
-                      <span
-                        key={t}
-                        className="text-xs bg-gray-100 text-gray-500 px-2 py-0.5 rounded-full"
-                      >
+                      <span key={t} className="text-xs bg-gray-100 text-gray-500 px-2 py-0.5 rounded-full">
                         {t}
                       </span>
                     ))}
@@ -245,20 +292,23 @@ export default function PodcastsPage() {
                   <div className="flex items-center gap-3">
                     <span className="text-gray-400 text-xs">⏱ {ep.duration}</span>
                     <button
-                      onClick={() =>
-                        setPlaying(playing === ep.id ? null : ep.id)
-                      }
+                      onClick={() => setPlaying(playing === ep.id ? null : ep.id)}
                       className={`flex items-center gap-1.5 text-sm font-semibold px-4 py-2 rounded-xl transition-colors ${
                         playing === ep.id
                           ? "bg-indigo-100 text-indigo-700"
                           : "bg-indigo-600 text-white hover:bg-indigo-700"
                       }`}
                     >
-                      {playing === ep.id ? "⏸ Pause" : "▶ Koute"}
+                      {playing === ep.id ? "⏸ Pause" : ep.type === "video" ? "▶ Gade" : "▶ Koute"}
                     </button>
                   </div>
                 </div>
-                {playing === ep.id && (
+                {playing === ep.id && ep.type === "video" && (
+                  <div className="mt-3 bg-gray-900 rounded-xl overflow-hidden aspect-video flex items-center justify-center">
+                    <span className="text-white/50 text-sm">📹 Vidéo ap chaje... (demo — {ep.youtubeId})</span>
+                  </div>
+                )}
+                {playing === ep.id && ep.type === "audio" && (
                   <div className="mt-3 bg-indigo-50 rounded-xl px-4 py-3 flex items-center gap-3">
                     <div className="flex gap-0.5">
                       {[3, 5, 4, 7, 5, 3, 6].map((h, idx) => (
@@ -278,14 +328,18 @@ export default function PodcastsPage() {
             </div>
           </div>
         ))}
+        {filtered.length === 0 && (
+          <div className="text-center text-gray-400 py-12">
+            Pa gen episòd ki koresponn ak filtre sa a.
+          </div>
+        )}
       </div>
 
       {/* Submit CTA */}
       <div className="mt-12 bg-gradient-to-r from-orange-500 to-amber-500 rounded-2xl p-8 text-white text-center">
         <h3 className="text-2xl font-black mb-2">Ou vle pataje istwa ou?</h3>
         <p className="text-orange-100 mb-6">
-          Nou ap chèche pwofesyonèl Ayisyen ki pret pataje eksperyans yo ak
-          prochèn jenerasyon an.
+          Nou ap chèche pwofesyonèl Ayisyen ki pret pataje eksperyans yo ak prochèn jenerasyon an.
         </p>
         <a
           href="mailto:podcast@xpoze.ht"

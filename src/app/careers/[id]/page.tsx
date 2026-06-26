@@ -1,4 +1,4 @@
-import { CAREERS, ROADMAPS, PROGRAMS } from "@/lib/data";
+import { CAREERS, ROADMAPS, PROGRAMS, CAREER_SALARIES } from "@/lib/data";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
@@ -147,6 +147,57 @@ export default async function CareerDetailPage({
           {!roadmap && (
             <div className="bg-gray-50 rounded-xl p-6 border border-dashed border-gray-300 text-center text-gray-500">
               Roadmap pou karyè sa a ap vini byento.
+            </div>
+          )}
+
+          {/* Salary Chart */}
+          {CAREER_SALARIES[id] && (
+            <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
+              <h2 className="font-semibold text-gray-900 mb-1">
+                💰 Pwogresyon salaryal (USD/an)
+              </h2>
+              <p className="text-gray-400 text-xs mb-5">
+                Estimasyon selon eksperyans — varye selon peyi ak sektè
+              </p>
+              <div className="space-y-5">
+                {CAREER_SALARIES[id].map((row, idx) => {
+                  const globalMax = Math.max(
+                    ...CAREER_SALARIES[id].map((r) => r.max)
+                  );
+                  const barMinPct = (row.min / globalMax) * 100;
+                  const barMaxPct = (row.max / globalMax) * 100;
+                  return (
+                    <div key={idx}>
+                      <div className="flex justify-between items-center mb-1.5">
+                        <span className="text-sm font-medium text-gray-700">
+                          {row.level}
+                        </span>
+                        <span className="text-xs text-[#1E8FE1] font-semibold">
+                          ${row.min.toLocaleString()} – ${row.max.toLocaleString()}
+                        </span>
+                      </div>
+                      <div className="relative h-4 bg-gray-100 rounded-full overflow-hidden">
+                        {/* min bar */}
+                        <div
+                          className="absolute top-0 h-full rounded-full bg-[#0B1D51]/30"
+                          style={{ width: `${barMinPct}%` }}
+                        />
+                        {/* max bar */}
+                        <div
+                          className="absolute top-0 h-full rounded-full bg-[#1E8FE1]"
+                          style={{
+                            left: `${barMinPct}%`,
+                            width: `${barMaxPct - barMinPct}%`,
+                          }}
+                        />
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+              <p className="text-gray-300 text-xs mt-4">
+                Barre bleye = fouchèt salè; barre gri = depa minimòm
+              </p>
             </div>
           )}
         </div>

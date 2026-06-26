@@ -14,6 +14,7 @@ export default function Navbar() {
     { href: "/careers", label: "Karyè" },
     { href: "/universities", label: "Inivèsite" },
     { href: "/mentors", label: "Mentor" },
+    { href: "/immigration", label: "Immigration" },
     { href: "/podcasts", label: "Podcast" },
     { href: "/live", label: "Live" },
   ];
