@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useAuthStore } from "@/lib/store";
 import { CAREERS, getCareersByRiasec } from "@/lib/data";
+import { LIVE_SESSIONS } from "@/lib/liveSessions";
 import { useT } from "@/lib/i18n";
 
 // ─── STUDENT DASHBOARD ────────────────────────────────────────────────────────
@@ -11,7 +12,11 @@ import { useT } from "@/lib/i18n";
 function StudentDashboard() {
   const { user } = useAuthStore();
   const { lang } = useT();
+  const [registered, setRegistered] = useState<Set<string>>(new Set());
   if (!user) return null;
+
+  const liveNow = LIVE_SESSIONS.filter((s) => s.isLive);
+  const upcomingSessions = LIVE_SESSIONS.filter((s) => !s.isLive).slice(0, 3);
 
   const riasecResult = user.riasecResult;
   const topCodes = riasecResult
@@ -118,6 +123,64 @@ function StudentDashboard() {
               </Link>
             </div>
           )}
+
+          {/* Live sessions — watch & sign up (students never see a Go Live button) */}
+          <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+            <div className="flex items-center justify-between mb-4">
+              <h2 className="font-semibold text-gray-900 flex items-center gap-2">
+                <span className="w-2.5 h-2.5 bg-red-500 rounded-full animate-pulse" />
+                {lang === "ht" ? "Sesyon Live k ap vini" : lang === "fr" ? "Sessions live à venir" : lang === "en" ? "Upcoming live sessions" : "Próximas sesiones en vivo"}
+              </h2>
+              <Link href="/live" className="text-[#1E8FE1] text-xs font-semibold hover:underline">
+                {lang === "ht" ? "Wè tout →" : lang === "fr" ? "Voir tout →" : lang === "en" ? "See all →" : "Ver todo →"}
+              </Link>
+            </div>
+
+            {/* Live NOW */}
+            {liveNow.map((s) => (
+              <div key={s.id} className="bg-gradient-to-r from-red-600 to-rose-500 rounded-xl p-4 mb-4 text-white flex flex-col sm:flex-row sm:items-center gap-3 justify-between">
+                <div className="min-w-0">
+                  <div className="flex items-center gap-2 mb-1">
+                    <span className="bg-white text-red-600 text-[10px] font-black px-2 py-0.5 rounded-full">🔴 LIVE</span>
+                    <span className="text-red-100 text-xs">{s.spotsLeft} {lang === "ht" ? "plas rete" : lang === "fr" ? "places restantes" : lang === "en" ? "spots left" : "plazas restantes"}</span>
+                  </div>
+                  <div className="font-bold text-sm">{s.title}</div>
+                  <div className="text-red-100 text-xs">{s.host} · ⏱ {s.duration}</div>
+                </div>
+                <Link href="/live" className="bg-white text-red-600 text-xs font-bold px-4 py-2 rounded-lg hover:bg-red-50 transition-colors text-center shrink-0">
+                  ▶ {lang === "ht" ? "Gade kounye a" : lang === "fr" ? "Regarder" : lang === "en" ? "Watch now" : "Ver ahora"}
+                </Link>
+              </div>
+            ))}
+
+            {/* Upcoming */}
+            <div className="space-y-3">
+              {upcomingSessions.map((s) => (
+                <div key={s.id} className="flex items-center gap-3 p-3 rounded-lg border border-gray-100 hover:bg-gray-50 transition-colors">
+                  <div className="w-12 h-12 bg-[#EEF4FF] rounded-xl flex flex-col items-center justify-center shrink-0">
+                    <span className="text-[#1E8FE1] font-black text-sm leading-none">{s.date.split("-")[2]}</span>
+                    <span className="text-[#1E8FE1]/60 text-[9px] font-bold uppercase">{["","jan","fev","mas","avr","me","jen","jiy","out","sep","okt","nov","des"][parseInt(s.date.split("-")[1])]}</span>
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <div className="font-medium text-gray-900 text-sm truncate">{s.title}</div>
+                    <div className="text-xs text-gray-500">{s.host} · {s.time}</div>
+                  </div>
+                  {registered.has(s.id) ? (
+                    <span className="bg-green-100 text-green-700 text-xs font-bold px-3 py-1.5 rounded-lg shrink-0">
+                      ✓ {lang === "ht" ? "Enskri" : lang === "fr" ? "Inscrit" : lang === "en" ? "Signed up" : "Inscrito"}
+                    </span>
+                  ) : (
+                    <button
+                      onClick={() => setRegistered((prev) => new Set(prev).add(s.id))}
+                      className="bg-[#1E8FE1] hover:bg-[#4AAEF0] text-white text-xs font-bold px-3 py-1.5 rounded-lg transition-colors shrink-0"
+                    >
+                      {lang === "ht" ? "Enskri" : lang === "fr" ? "S'inscrire" : lang === "en" ? "Sign up" : "Inscribirse"}
+                    </button>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             {[
