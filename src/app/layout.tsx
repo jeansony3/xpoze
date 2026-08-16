@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
 const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
@@ -17,6 +18,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className="antialiased min-h-screen bg-[#F0F5FF] flex flex-col">
         <Navbar />
         <main className="flex-1">{children}</main>
+        <SpeedInsights />
         <footer className="bg-[#0B1D51] text-white pt-16 pb-8 relative overflow-hidden">
           {/* Geometric decoration */}
           <div className="absolute bottom-0 right-0 w-96 h-96 opacity-5 pointer-events-none">
